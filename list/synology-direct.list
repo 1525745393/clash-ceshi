@@ -1,0 +1,3 @@
+RULE-SET,synology-direct,Synology-Direct  # 优先匹配 
+GEOIP,CN,DIRECT                          # 常规国内流量 
+MATCH,PROXY                              # 默认代理 
