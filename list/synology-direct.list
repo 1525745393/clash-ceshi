@@ -1,3 +1,11 @@
-RULE-SET,synology-direct,Synology-Direct  # 优先匹配 
-GEOIP,CN,DIRECT                          # 常规国内流量 
-MATCH,PROXY                              # 默认代理 
+proxy-groups:
+  - name: "Synology-Direct"  # 策略组名称 
+    type: select  # 手动选择模式 
+    proxies:
+      - DIRECT    # 强制直连 
+      - REJECT    # 备用策略（可选）
+    filter:       # 域名匹配规则 
+      - '+.synology.com' 
+      - '+.quickconnect.to' 
+      - '+.synology.me' 
+      - '+.synology.cn' 
