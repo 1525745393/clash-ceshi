@@ -1,11 +1,8 @@
-proxy-groups:
-  - name: "Synology-Direct"  # 策略组名称 
-    type: select  # 手动选择模式 
-    proxies:
-      - DIRECT    # 强制直连 
-      - REJECT    # 备用策略（可选）
-    filter:       # 域名匹配规则 
-      - '+.synology.com' 
-      - '+.quickconnect.to' 
-      - '+.synology.me' 
-      - '+.synology.cn' 
+# Synology 直连域名列表（2025年5月更新）
+.synology.com 
+.quickconnect.to  
+.synology.me 
+.synology.cn  
+.synologyapi.com  
+.scdn.synology.com   # 新增CDN节点 
+.download.synology.com   # 软件下载专用 
