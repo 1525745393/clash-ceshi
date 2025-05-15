@@ -1,40 +1,29 @@
-# ===== Synology 设备及服务直连规则 =====
-# 版本：1.1
-# 说明：
-# - 请将 192.168.3.6 替换为你的群晖设备实际内网 IP
-# - 群晖相关流量直连，避免代理造成连接失败
-# - QuickConnect/DDNS/DNS 解析优化，全链路保障远程访问
-# - Clash Meta / Stash / Surge 通用格式
+# ===== Synology 群晖设备及服务直连规则 =====
+# 适用模式：Clash.Meta / RuleSet 分离 / TUN + Fake-IP
+# 最佳搭配：主路由透明代理环境
+# 功能说明：
+# - 保证群晖设备本地及远程访问稳定
+# - 直连管理端口、CloudFront CDN、DDNS 域名
+# - 配合 fake-ip 模式 DNS 分流使用
 
-# ========== 内网直连 ==========
-SRC-IP,192.168.3.6,DIRECT               # 群晖设备自身流量绕过代理（适用于旁路网关）
+# 群晖设备内网 IP（请替换为你的实际 IP）
+SRC-IP,192.168.3.6
 
-# ========== 群晖域名 ==========
-DOMAIN-KEYWORD,synology,DIRECT         # 匹配所有包含 synology 的域名
-DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns,no-resolve  # 避免本地污染
-DOMAIN-SUFFIX,diskstation.me,DIRECT    # 群晖官方 DDNS 服务
-DOMAIN-SUFFIX,dscloud.biz,DIRECT       # 同上
-DOMAIN-SUFFIX,quickconnect.to,DIRECT   # QuickConnect 主域名
-DOMAIN-SUFFIX,synology.quickconnect.to,DIRECT  # 子域名支持
+# 群晖相关关键词域名直连
+DOMAIN-KEYWORD,synology
 
-# ========== QuickConnect 云通道 CDN ==========
-DOMAIN-SUFFIX,cloudfront.net,DIRECT    # AWS CloudFront 节点，避免连接慢/失败
-DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT    # 指定 Synology 服务节点
+# 群晖官方 DDNS 域名直连
+DOMAIN-SUFFIX,quickconnect.to
+DOMAIN-SUFFIX,diskstation.me
+DOMAIN-SUFFIX,dscloud.biz
 
-# ========== QuickConnect 相关 IP 段 ==========
-IP-CIDR,13.0.0.0/8,DIRECT,no-resolve   # AWS IP 段（QuickConnect）
-IP-CIDR,18.0.0.0/8,DIRECT,no-resolve
-IP-CIDR,34.0.0.0/8,DIRECT,no-resolve
-IP-CIDR,52.0.0.0/8,DIRECT,no-resolve
+# 避免 DNS 污染与解析错误
+DOMAIN-SUFFIX,synology.cn
 
-# ========== 群晖远程访问端口 ==========
-PROTOCOL,TCP:5000,DIRECT               # DSM HTTP
-PROTOCOL,TCP:5001,DIRECT               # DSM HTTPS
-PROTOCOL,UDP:5000-5001,DIRECT          # QuickConnect UDP
-PROTOCOL,TCP:6690,DIRECT               # Synology Drive、Cloud Station
+# CloudFront CDN 节点，用于群晖某些更新或资源加载
+DOMAIN,d2f0395ykn6hxb.cloudfront.net
 
-# ========== 默认国内流量 ==========
-GEOIP,CN,DIRECT                         # 国内流量走直连
-
-# ========== 默认策略 ==========
-#MATCH,PROXY                           # 开启时：未匹配的流量默认代理
+# 群晖服务关键端口直连，确保远程/同步功能稳定
+PROTOCOL,UDP:5000-5001
+PROTOCOL,TCP:5000
+PROTOCOL,TCP:6690
