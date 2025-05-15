@@ -33,3 +33,29 @@ DOMAIN-SUFFIX,synology.cn
 DOMAIN-SUFFIX,synology.com
 DOMAIN-SUFFIX,synology.me
 DOMAIN-KEYWORD,synology
+# 群晖设备直连规则（将 IP 替换为实际 IP）
+SRC-IP,192.168.3.6,DIRECT
+
+# Synology 域名直连
+DOMAIN,d2f0395ykn6hxb.cloudfront.net
+DOMAIN-KEYWORD,synology
+DOMAIN-SUFFIX,diskstation.me
+DOMAIN-SUFFIX,dscloud.biz
+DOMAIN-SUFFIX,dscloud.me
+DOMAIN-SUFFIX,dscloud.mobi
+DOMAIN-SUFFIX,dsmunas.com
+DOMAIN-SUFFIX,dsmunas.net
+DOMAIN-SUFFIX,dsmunas.org
+DOMAIN-SUFFIX,familyds.com
+DOMAIN-SUFFIX,familyds.net
+DOMAIN-SUFFIX,familyds.org
+DOMAIN-SUFFIX,i234.me
+DOMAIN-SUFFIX,myds.com
+DOMAIN-SUFFIX,quickconnect.to,DIRECT
+DOMAIN-SUFFIX,synology.cn,DIRECT
+DOMAIN-SUFFIX,synology.com 
+DOMAIN-SUFFIX,synology.me 
+DOMAIN-SUFFIX,synology.cn  
+DOMAIN-SUFFIX,synologyapi.com  
+DOMAIN-SUFFIX,scdn.synology.com 
+DOMAIN-SUFFIX,download.synology.com   
