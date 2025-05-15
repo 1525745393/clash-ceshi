@@ -1,14 +1,58 @@
-# ====== 设备级控制 ======
-SRC-IP,192.168.3.6,DIRECT
+# ===== Synology 设备及服务直连规则 =====
+# 版本：1.0
+# 说明：
+# - 请将 192.168.3.6 替换为你的群晖设备实际内网IP
+# - 直连群晖设备IP，避免代理导致访问异常
+# - 关键端口和域名走直连，确保服务稳定
+# - synology.cn 域名强制远程DNS解析，防止DNS污染
+# - 其他流量默认走代理（PROXY）
 
-# ====== 域名级分流 ======
-DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT
-DOMAIN-KEYWORD,synology,DIRECT
-DOMAIN-SUFFIX,diskstation.me,DIRECT
-DOMAIN-SUFFIX,quickconnect.to,DIRECT
-DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns
+# 设备级控制，指定群晖内网IP直连
+SRC-IP,192.168.3.6,DIRECT  
+# 说明：指定源IP为设备内网IP，流量直连，绕过代理
 
-# ====== 协议级优化 ======
-PROCESS-NAME,QuickConnect,UDP:5000-5001,DIRECT
-PROTOCOL,TCP:5000-5001,DIRECT
-PROTOCOL,TCP:6690,DIRECT
+# 官方服务动态CDN节点直连，提升访问速度和稳定性
+DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT  
+# 说明：群晖部分服务使用CloudFront CDN，需直连避免访问延迟
+
+# 关键词匹配，所有包含“synology”的域名直连
+DOMAIN-KEYWORD,synology,DIRECT  
+# 说明：匹配含有synology关键词的域名，保证管理访问正常
+
+# DDNS 域名后缀直连，确保远程访问稳定
+DOMAIN-SUFFIX,diskstation.me,DIRECT  
+DOMAIN-SUFFIX,dscloud.biz,DIRECT  
+DOMAIN-SUFFIX,quickconnect.to,DIRECT  
+# 说明：群晖官方动态域名服务，走直连避免解析或连接问题
+
+# 中国区域专属域名，强制使用远程DNS解析，规避本地DNS污染
+DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns  
+# 说明：国内synology官方域名，强制远程DNS避免劫持或污染
+
+# 备用策略，禁止本地DNS解析该域名（no-resolve）
+DOMAIN-SUFFIX,synology.cn,DIRECT,no-resolve  
+# 说明：防止本地DNS缓存造成解析异常，强制走远程DNS解析
+
+# 区域IP匹配，属于中国大陆IP段的流量直接放行
+GEOIP,CN,DIRECT  
+# 说明：中国大陆IP直连，优化访问速度和稳定性
+
+# 默认走代理，其他未匹配流量通过代理转发
+MATCH,PROXY  
+# 说明：所有未匹配规则流量默认使用代理
+
+# 关键端口协议直连，确保服务端口通信正常
+PROTOCOL,UDP:5000-5001,DIRECT  
+# 说明：QuickConnect 使用的UDP端口，保证群晖远程连接功能
+
+PROTOCOL,TCP:6690,DIRECT  
+# 说明：Synology Drive 服务使用端口，需直连保证同步稳定
+
+PROTOCOL,TCP:5000,DIRECT  
+# 说明：DSM管理界面HTTP端口，确保管理访问正常
+
+# 特殊域名走代理，示例带加密认证头（需要替换实际API_KEY）
+DOMAIN,synology.com,PROXY  
+# 说明：访问synology.com时使用代理并添加特定HTTP头，保护安全
+# http-header:  
+#   - "X-ZT-Auth: {{HMAC-SHA256($API_KEY)}}"  
