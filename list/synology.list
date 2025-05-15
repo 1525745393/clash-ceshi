@@ -6,7 +6,7 @@
 # - 关键端口和域名走直连，确保服务稳定
 # - synology.cn 域名强制远程DNS解析，防止DNS污染
 # - 其他流量默认走代理（PROXY）
-
+DOMAIN-SUFFIX,quickconnect.to,DIRECT
 # 设备级控制，指定群晖内网IP直连
 SRC-IP,192.168.3.6,DIRECT  
 # 说明：指定源IP为设备内网IP，流量直连，绕过代理
