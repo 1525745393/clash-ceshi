@@ -1,33 +1,34 @@
-# 指定群晖设备IP直连（替换为实际内网IP）  
-- SRC-IP,192.168.3.6,DIRECT  
-  # 安全建议：  
-  # 1. 绑定MAC地址防止IP变更  
-  # 2. 启用防火墙仅放行5000/5001等必要端口  
-# 官方服务域名（动态CDN节点）  
-DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT   
-DOMAIN-KEYWORD,synology,DIRECT  
-  # 覆盖所有含synology关键词的域名  
-
-# 动态域名服务（DDNS）  
-DOMAIN-SUFFIX,diskstation.me,DIRECT   
-DOMAIN-SUFFIX,dscloud.biz,DIRECT   
-DOMAIN-SUFFIX,quickconnect.to,DIRECT   
-  # 性能优化：UDP 5000-5001端口需同步直连  
-
-# 中国区专属域名  
-DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns   
-  # 强制使用远程DNS解析，规避本地污染  
-# 加密DNS配置  
+# ====== 设备级控制 ======  
+- SRC-IP,192.168.3.6,DIRECT  # 需替换实际IP  
+  # 安全措施：  
+  # 1. 执行`arp -s 192.168.3.6 <MAC>`绑定  
+  # 2. 防火墙放行5000-5001/tcp, 5000-5001/udp  
+ 
+# ====== 域名级分流 ======  
+- DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT   
+- DOMAIN-KEYWORD,synology,DIRECT  # 修复点：补全动作  
+- DOMAIN-SUFFIX,diskstation.me,DIRECT   
+- DOMAIN-SUFFIX,quickconnect.to,DIRECT   
+- DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns   # 修复点：去重  
+ 
+# ====== 协议级优化 ======  
+- PROCESS-NAME,QuickConnect,UDP:5000-5001,DIRECT  
+- PROTOCOL,TCP:5000-5001,DIRECT  # 修复点：补全5001端口  
+- PROTOCOL,TCP:6690,DIRECT  
+ 
+# ====== 智能DNS ======  
 dns:  
   enable: true  
   nameserver:  
-    - tls://dns.synology.cn:853   # 群晖官方DNS  
-    - https://1.12.12.12/dns-query  # 国内备用  
+    - tls://dns.synology.cn:853   
+    - https://1.12.12.12/dns-query#pin-sha256="abc123..."  # 修复点：证书钉扎  
+    - quic://dns.synology.cn:853   
   fallback-filter:  
     geoip: true  
     ipcidr:  
       - 240.0.0.0/4  
-# 关键服务端口直连  
-PROTOCOL,UDP:5000-5001,DIRECT  # QuickConnect  
-PROTOCOL,TCP:6690,DIRECT       # Synology Drive  
-PROTOCOL,TCP:5000,DIRECT       # DSM管理界面  
+ 
+# ====== 流量控制 ======  
+tc qdisc add dev eth0 root handle 1: htb  
+tc class add dev eth0 parent 1: classid 1:10 htb rate 100Mbit ceil 150Mbit burst 20k  
+tc filter add dev eth0 protocol ip parent 1: prio 1 u32 match ip dst 192.168.3.6 flowid 1:10  
