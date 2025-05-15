@@ -1,29 +1,23 @@
-# ===== Synology 群晖设备及服务直连规则 =====
-# 适用模式：Clash.Meta / RuleSet 分离 / TUN + Fake-IP
-# 最佳搭配：主路由透明代理环境
-# 功能说明：
-# - 保证群晖设备本地及远程访问稳定
-# - 直连管理端口、CloudFront CDN、DDNS 域名
-# - 配合 fake-ip 模式 DNS 分流使用
-
-# 群晖设备内网 IP（请替换为你的实际 IP）
-SRC-IP,192.168.3.6
-
-# 群晖相关关键词域名直连
+# Synology 域名直连
+DOMAIN,d2f0395ykn6hxb.cloudfront.net
 DOMAIN-KEYWORD,synology
-
-# 群晖官方 DDNS 域名直连
-DOMAIN-SUFFIX,quickconnect.to
 DOMAIN-SUFFIX,diskstation.me
 DOMAIN-SUFFIX,dscloud.biz
-
-# 避免 DNS 污染与解析错误
-DOMAIN-SUFFIX,synology.cn
-
-# CloudFront CDN 节点，用于群晖某些更新或资源加载
-DOMAIN,d2f0395ykn6hxb.cloudfront.net
-
-# 群晖服务关键端口直连，确保远程/同步功能稳定
-PROTOCOL,UDP:5000-5001
-PROTOCOL,TCP:5000
-PROTOCOL,TCP:6690
+DOMAIN-SUFFIX,dscloud.me
+DOMAIN-SUFFIX,dscloud.mobi
+DOMAIN-SUFFIX,dsmunas.com
+DOMAIN-SUFFIX,dsmunas.net
+DOMAIN-SUFFIX,dsmunas.org
+DOMAIN-SUFFIX,familyds.com
+DOMAIN-SUFFIX,familyds.net
+DOMAIN-SUFFIX,familyds.org
+DOMAIN-SUFFIX,i234.me
+DOMAIN-SUFFIX,myds.com
+DOMAIN-SUFFIX,quickconnect.to,DIRECT
+DOMAIN-SUFFIX,synology.cn,DIRECT
+DOMAIN-SUFFIX,synology.com 
+DOMAIN-SUFFIX,synology.me 
+DOMAIN-SUFFIX,synology.cn  
+DOMAIN-SUFFIX,synologyapi.com  
+DOMAIN-SUFFIX,scdn.synology.com 
+DOMAIN-SUFFIX,download.synology.com   
