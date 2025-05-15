@@ -1,26 +1,33 @@
-# 群晖设备直连规则（将 IP 替换为实际 IP）
-SRC-IP,192.168.3.6,DIRECT
+# 指定群晖设备IP直连（替换为实际内网IP）  
+- SRC-IP,192.168.3.6,DIRECT  
+  # 安全建议：  
+  # 1. 绑定MAC地址防止IP变更  
+  # 2. 启用防火墙仅放行5000/5001等必要端口  
+# 官方服务域名（动态CDN节点）  
+DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT   
+DOMAIN-KEYWORD,synology,DIRECT  
+  # 覆盖所有含synology关键词的域名  
 
-# Synology 域名直连
-DOMAIN,d2f0395ykn6hxb.cloudfront.net
-DOMAIN-KEYWORD,synology
-DOMAIN-SUFFIX,diskstation.me
-DOMAIN-SUFFIX,dscloud.biz
-DOMAIN-SUFFIX,dscloud.me
-DOMAIN-SUFFIX,dscloud.mobi
-DOMAIN-SUFFIX,dsmunas.com
-DOMAIN-SUFFIX,dsmunas.net
-DOMAIN-SUFFIX,dsmunas.org
-DOMAIN-SUFFIX,familyds.com
-DOMAIN-SUFFIX,familyds.net
-DOMAIN-SUFFIX,familyds.org
-DOMAIN-SUFFIX,i234.me
-DOMAIN-SUFFIX,myds.com
-DOMAIN-SUFFIX,quickconnect.to,DIRECT
-DOMAIN-SUFFIX,synology.cn,DIRECT
-DOMAIN-SUFFIX,synology.com 
-DOMAIN-SUFFIX,synology.me 
-DOMAIN-SUFFIX,synology.cn  
-DOMAIN-SUFFIX,synologyapi.com  
-DOMAIN-SUFFIX,scdn.synology.com 
-DOMAIN-SUFFIX,download.synology.com   
+# 动态域名服务（DDNS）  
+DOMAIN-SUFFIX,diskstation.me,DIRECT   
+DOMAIN-SUFFIX,dscloud.biz,DIRECT   
+DOMAIN-SUFFIX,quickconnect.to,DIRECT   
+  # 性能优化：UDP 5000-5001端口需同步直连  
+
+# 中国区专属域名  
+DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns   
+  # 强制使用远程DNS解析，规避本地污染  
+# 加密DNS配置  
+dns:  
+  enable: true  
+  nameserver:  
+    - tls://dns.synology.cn:853   # 群晖官方DNS  
+    - https://1.12.12.12/dns-query  # 国内备用  
+  fallback-filter:  
+    geoip: true  
+    ipcidr:  
+      - 240.0.0.0/4  
+# 关键服务端口直连  
+PROTOCOL,UDP:5000-5001,DIRECT  # QuickConnect  
+PROTOCOL,TCP:6690,DIRECT       # Synology Drive  
+PROTOCOL,TCP:5000,DIRECT       # DSM管理界面  
