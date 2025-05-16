@@ -24,6 +24,6 @@ DOMAIN-SUFFIX,synodns.com
 DOMAIN-SUFFIX,synology.cn
 DOMAIN-SUFFIX,synology.com
 DOMAIN-SUFFIX,synology.me
-DOMAIN-KEYWORD,Synology
+DOMAIN-KEYWORD,https://raw.githubusercontent.com/1525745393/clash-ceshi/refs/heads/main/list/synology.list,Synology
 MATCH,PROXY
 
