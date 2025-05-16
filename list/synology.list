@@ -24,10 +24,10 @@ DOMAIN-SUFFIX,synodns.com
 DOMAIN-SUFFIX,synology.cn
 DOMAIN-SUFFIX,synology.com
 DOMAIN-SUFFIX,synology.me
-RULE-SET,Synology,Synology
-RULE-SET,CN,DIRECT
-GEOIP,CN,DIRECT
-FINAL,Proxy
+rule=RULE-SET,Synology,Synology
+rule=RULE-SET,CN,DIRECT
+rule=GEOIP,CN,DIRECT
+rule=FINAL,Proxy
 DOMAIN-KEYWORD,https://raw.githubusercontent.com/1525745393/clash-ceshi/refs/heads/main/list/synology.list,Synology
 MATCH,PROXY
 
