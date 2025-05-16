@@ -22,4 +22,7 @@ DOMAIN-SUFFIX,synology.me
 DOMAIN-SUFFIX,synologyapi.com
 DOMAIN-SUFFIX,scdn.synology.com
 DOMAIN-SUFFIX,download.synology.com
-
+DOMAIN-SUFFIX,synology.cn,DIRECT   
+DOMAIN-KEYWORD,synology,PROXY  
+GEOIP,CN,DIRECT  
+FINAL,PROXY  
