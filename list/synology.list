@@ -15,9 +15,8 @@ DOMAIN-SUFFIX,i234.me
 DOMAIN-SUFFIX,myds.com
 DOMAIN-SUFFIX,quickconnect.to,DIRECT
 DOMAIN-SUFFIX,synology.cn,DIRECT
-DOMAIN-SUFFIX,synology.com 
-DOMAIN-SUFFIX,synology.me 
-DOMAIN-SUFFIX,synology.cn  
-DOMAIN-SUFFIX,synologyapi.com  
-DOMAIN-SUFFIX,scdn.synology.com 
-DOMAIN-SUFFIX,download.synology.com   
+DOMAIN-SUFFIX,synology.com,DIRECT
+DOMAIN-SUFFIX,synology.me,DIRECT 
+DOMAIN-SUFFIX,synologyapi.com,DIRECT  
+DOMAIN-SUFFIX,scdn.synology.com,DIRECT
+DOMAIN-SUFFIX,download.synology.com,DIRECT   
