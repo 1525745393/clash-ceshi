@@ -1,64 +1,29 @@
-# ========================================================
-# 群晖 Synology 专用分流规则 (.list 格式)
-# 版本：v1.0
-# 功能：确保群晖设备及服务直连，其余自动走代理
-# 用法：配合 custom_proxy_group 使用，支持 OpenClash/Clash Premium
-# ========================================================
+# NAME: Synology
+# AUTHOR: blackmatrix7
+# REPO: https://github.com/blackmatrix7/ios_rule_script
+# UPDATED: 2024-07-03 16:17:00
+# DOMAIN: 1
+# DOMAIN-KEYWORD: 1
+# DOMAIN-SUFFIX: 17
+# TOTAL: 19
+DOMAIN,d2f0395ykn6hxb.cloudfront.net
+DOMAIN-SUFFIX,diskstation.me
+DOMAIN-SUFFIX,dscloud.biz
+DOMAIN-SUFFIX,dscloud.me
+DOMAIN-SUFFIX,dscloud.mobi
+DOMAIN-SUFFIX,dsmunas.com
+DOMAIN-SUFFIX,dsmunas.net
+DOMAIN-SUFFIX,dsmunas.org
+DOMAIN-SUFFIX,familyds.com
+DOMAIN-SUFFIX,familyds.net
+DOMAIN-SUFFIX,familyds.org
+DOMAIN-SUFFIX,i234.me
+DOMAIN-SUFFIX,myds.com
+DOMAIN-SUFFIX,quickconnect.to
+DOMAIN-SUFFIX,synodns.com
+DOMAIN-SUFFIX,synology.cn
+DOMAIN-SUFFIX,synology.com
+DOMAIN-SUFFIX,synology.me
+DOMAIN-KEYWORD,Synology
+MATCH,PROXY
 
-# ===== 策略组绑定规则（自定义 Synology 策略组） =====
-#custom_proxy_group=Synology`[]新加坡-自动`GEOIP,CN,DIRECT`FINAL,PROXY
-# ↑ 所有规则将绑定到 Synology 策略组
-# 第一个代理候选是“新加坡-自动”
-# 命中 CN 地区则走 DIRECT，其余统一走 PROXY
-
-# ===== 设备级直连（绑定群晖内网 IP） =====
-SRC-IP,192.168.3.6,DIRECT  
-# 群晖主机 IP 地址直连，避免一切代理干扰
-# 建议在路由器中将该 IP 做 MAC 绑定防止变动
-DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns
-DOMAIN-SUFFIX,synology.cn,DIRECT,no-resolve
-
-# ===== 群晖常用域名分流 =====
-
-DOMAIN,d2f0395ykn6hxb.cloudfront.net,DIRECT  
-# 群晖 QuickConnect 使用的 CDN 直连，避免延迟
-
-DOMAIN-KEYWORD,synology,DIRECT  
-# 包含 synology 的所有域名直连，包括系统更新、服务检查等
-
-DOMAIN-SUFFIX,diskstation.me,DIRECT  
-# 群晖官方 DDNS 服务
-
-DOMAIN-SUFFIX,dscloud.biz,DIRECT  
-# Synology 云端服务常用域名
-
-DOMAIN-SUFFIX,quickconnect.to,DIRECT  
-# QuickConnect 快速连接域名
-
-DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns  
-# 群晖中国区域名，强制远程解析以防止本地污染
-
-DOMAIN-SUFFIX,synology.cn,DIRECT,no-resolve  
-# 禁止本地 DNS 解析，进一步加强强制远程解析效果
-
-# ===== 协议端口级直连 =====
-
-PROTOCOL,UDP:5000-5001,DIRECT  
-# 群晖 QuickConnect 服务的穿透端口
-
-PROTOCOL,TCP:5000,DIRECT  
-# DSM 默认 HTTP 管理端口（Web UI）
-
-PROTOCOL,TCP:5001,DIRECT  
-# DSM 默认 HTTPS 管理端口
-
-PROTOCOL,TCP:6690,DIRECT  
-# Synology Drive 同步服务端口
-
-# ===== 区域优化规则 =====
-
-GEOIP,CN,DIRECT  
-# 所有中国大陆 IP 地址直连，提高国内访问速度
-
-MATCH,PROXY  
-# 所有未匹配规则的流量自动走代理（默认兜底）
