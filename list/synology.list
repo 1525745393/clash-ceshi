@@ -15,6 +15,8 @@
 SRC-IP,192.168.3.6,DIRECT  
 # 群晖主机 IP 地址直连，避免一切代理干扰
 # 建议在路由器中将该 IP 做 MAC 绑定防止变动
+DOMAIN-SUFFIX,synology.cn,DIRECT,force-remote-dns
+DOMAIN-SUFFIX,synology.cn,DIRECT,no-resolve
 
 # ===== 群晖常用域名分流 =====
 
