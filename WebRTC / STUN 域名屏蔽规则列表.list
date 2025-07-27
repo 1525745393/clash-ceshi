@@ -1,7 +1,10 @@
-! WebRTC / STUN 服务器拦截规则（防止本地 IP 泄露）
+! AdGuard Home 拦截规则
+! 功能：WebRTC / STUN + 跟踪域名拦截
 ! 更新时间：2025-07-27
-! 建议搭配 VPN、防火墙、浏览器隐私设置一同使用
+! 用于防止真实 IP 泄露和隐私追踪
+! 建议搭配 VPN、防火墙使用以实现最大防护
 
+! ===== WebRTC / STUN 拦截规则（防止真实 IP 泄露）=====
 ||stun.l.google.com^
 ||stun1.l.google.com^
 ||stun2.l.google.com^
@@ -22,10 +25,6 @@
 ||stun.tiscali.it^
 ||stun.qvod.com^
 ||stun.nextcloud.com^
-||stun.iptel.org^
-||stun.softjoys.com^
-||stun.voiparound.com^
-||stun.voipstunt.com^
 ||stunserver.org^
 ||meet.jit.si^
 ||meet.google.com^
@@ -35,7 +34,7 @@
 ||global.stun.twilio.com^
 ||relay.webwormhole.io^
 
-! 跟踪&遥测服务拦截（提高隐私）
+! ===== 跟踪 & 遥测域名 =====
 ||app-measurement.com^
 ||firebase-settings.crashlytics.com^
 ||crashlytics.com^
@@ -49,3 +48,23 @@
 ||graph.facebook.com^
 ||connect.facebook.net^
 ||log.fc2.com^
+
+! ===== 直接阻断域名（非广告拦截规则格式，用于 DNS 污染防护等）=====
+stun.l.google.com
+stun1.l.google.com
+stun2.l.google.com
+stun3.l.google.com
+stun4.l.google.com
+stun.services.mozilla.com
+global.stun.twilio.com
+relay.webwormhole.io
+stun.ekiga.net
+stun.ideasip.com
+stun.iptel.org
+stun.schlund.de
+stun.softjoys.com
+stun.voiparound.com
+stun.voipbuster.com
+stun.voipstunt.com
+stun.voxgratia.org
+stun.xten.com
