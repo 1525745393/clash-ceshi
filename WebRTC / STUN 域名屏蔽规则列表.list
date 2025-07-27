@@ -1,6 +1,6 @@
-! WebRTC / STUN 服务器拦截规则（用于防止真实 IP 泄露）
+! WebRTC / STUN 服务器拦截规则（防止本地 IP 泄露）
 ! 更新时间：2025-07-27
-! 建议搭配 VPN、防火墙一同使用以达到最大隐私防护
+! 建议搭配 VPN、防火墙、浏览器隐私设置一同使用
 
 ||stun.l.google.com^
 ||stun1.l.google.com^
@@ -22,6 +22,10 @@
 ||stun.tiscali.it^
 ||stun.qvod.com^
 ||stun.nextcloud.com^
+||stun.iptel.org^
+||stun.softjoys.com^
+||stun.voiparound.com^
+||stun.voipstunt.com^
 ||stunserver.org^
 ||meet.jit.si^
 ||meet.google.com^
@@ -30,3 +34,18 @@
 ||turn.ipfire.org^
 ||global.stun.twilio.com^
 ||relay.webwormhole.io^
+
+! 跟踪&遥测服务拦截（提高隐私）
+||app-measurement.com^
+||firebase-settings.crashlytics.com^
+||crashlytics.com^
+||doubleclick.net^
+||google-analytics.com^
+||ssl.google-analytics.com^
+||googletagmanager.com^
+||googletagservices.com^
+||pagead2.googlesyndication.com^
+||tracking-protection.cdn.mozilla.net^
+||graph.facebook.com^
+||connect.facebook.net^
+||log.fc2.com^
