@@ -1,0 +1,32 @@
+! WebRTC / STUN 服务器拦截规则（用于防止真实 IP 泄露）
+! 更新时间：2025-07-27
+! 建议搭配 VPN、防火墙一同使用以达到最大隐私防护
+
+||stun.l.google.com^
+||stun1.l.google.com^
+||stun2.l.google.com^
+||stun3.l.google.com^
+||stun4.l.google.com^
+||stun.services.mozilla.com^
+||stun.stunprotocol.org^
+||stun.voipbuster.com^
+||stun.voxgratia.org^
+||stun.xten.com^
+||stun.ekiga.net^
+||stun.ideasip.com^
+||stun.schlund.de^
+||stun1.voiceeclipse.net^
+||stun.fwdnet.net^
+||stun.counterpath.com^
+||stun.zoiper.com^
+||stun.tiscali.it^
+||stun.qvod.com^
+||stun.nextcloud.com^
+||stunserver.org^
+||meet.jit.si^
+||meet.google.com^
+||turn.anyfirewall.com^
+||turn.bistri.com^
+||turn.ipfire.org^
+||global.stun.twilio.com^
+||relay.webwormhole.io^
