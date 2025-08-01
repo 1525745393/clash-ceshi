@@ -1,4 +1,4 @@
-# AVQVJP.list - 日本女优站点分流规则
+8# AVQVJP.list - 日本女优站点分流规则
 # 更新时间：2025-08-01
 # 共 33 条规则，已去重并排序
 
@@ -36,3 +36,5 @@ DOMAIN-SUFFIX,tameikegoro.jp
 DOMAIN-SUFFIX,to-satsu.com
 DOMAIN-SUFFIX,v-av.com
 DOMAIN-SUFFIX,wanz-factory.com
+DOMAIN-SUFFIX,xcity.jp
+DOMAIN-SUFFIX,dmm.co.jp
