@@ -1,10 +1,15 @@
-DOMAIN-SUFFIX,cnmdb.net
-DOMAIN-SUFFIX,hscangku.net
-DOMAIN-SUFFIX,cableav.tv
-DOMAIN-SUFFIX,lulubar.co
-DOMAIN-SUFFIX,love6.tv
-DOMAIN-SUFFIX,yesjav.info
-DOMAIN-SUFFIX,fc2club.top
-DOMAIN-SUFFIX,javten.com
+# AV资源站.list - 日本 AV 资源站、索引站域名列表
+# 更新时间：2025-08-01
+# 用于分流资源站，建议单独作为一个规则集
+# 共 10 条规则
+
 DOMAIN-SUFFIX,airav.wiki
 DOMAIN-SUFFIX,av-wiki.net
+DOMAIN-SUFFIX,cableav.tv
+DOMAIN-SUFFIX,cnmdb.net
+DOMAIN-SUFFIX,fc2club.top
+DOMAIN-SUFFIX,hscangku.net
+DOMAIN-SUFFIX,javten.com
+DOMAIN-SUFFIX,love6.tv
+DOMAIN-SUFFIX,lulubar.co
+DOMAIN-SUFFIX,yesjav.info
