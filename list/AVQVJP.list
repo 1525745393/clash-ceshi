@@ -41,7 +41,10 @@ DOMAIN-SUFFIX,dmm.co.jp
 # ABEMA.list
 DOMAIN-SUFFIX,abema.tv
 DOMAIN,api.abema.io
+DOMAIN,log.abema.io
+DOMAIN,ws-abema-production.abema.io
 DOMAIN,ds-linear-abematv.akamaized.net
 DOMAIN,vod-abematv.akamaized.net
 DOMAIN,abematv.akamaized.net
-
+DOMAIN-SUFFIX,abema-tv.com
+DOMAIN,abema-adx.ameba.jp
