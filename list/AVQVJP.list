@@ -38,25 +38,10 @@ DOMAIN-SUFFIX,v-av.com
 DOMAIN-SUFFIX,wanz-factory.com
 DOMAIN-SUFFIX,xcity.jp
 DOMAIN-SUFFIX,dmm.co.jp
-
-
-# 🎥 ABEMA 分流规则 v1.0
-# 📅 更新时间：2025-08-02
-# 🏷️ 规则分类：ABEMA 主站域名 + 内容分发 + API + 广告与 GEO
-# 📦 建议分流组名：ABEMA / Streaming-JP / JP-Media
-# 📥 推荐配合 Clash 或 MosDNS 使用
-
-# 🌐 主域名
+# ABEMA.list
 DOMAIN-SUFFIX,abema.tv
-DOMAIN-SUFFIX,ameba.jp
-
-# 📦 CDN 内容分发
-DOMAIN,ds-linear-abematv.akamaized.net
-DOMAIN,ds-vod-abematv.akamaized.net
-DOMAIN,vod-abematv.akamaized.net
-DOMAIN,linear-abematv.akamaized.net
-
-# 🧠 App 与 API 接口
 DOMAIN,api.abema.io
-DOMAIN,api.abema.tv
-DOMAIN,api.ameba.jp
+DOMAIN,ds-linear-abematv.akamaized.net
+DOMAIN,vod-abematv.akamaized.net
+DOMAIN,abematv.akamaized.net
+
