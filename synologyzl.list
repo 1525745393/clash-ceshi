@@ -1,3 +1,41 @@
-synology.com
+# === 群晖远程访问专用代理规则示例 ===
+
+# 1. 群晖官方相关域名，直连
+DOMAIN-SUFFIX,synology.com,DIRECT
+DOMAIN-SUFFIX,synology.cn,DIRECT
+DOMAIN-SUFFIX,download.synology.com,DIRECT
+DOMAIN-SUFFIX,download.synology.cn,DIRECT
+DOMAIN-SUFFIX,update.synology.com,DIRECT
+DOMAIN-SUFFIX,update.synology.cn,DIRECT
+DOMAIN-SUFFIX,quickconnect.to,DIRECT
+DOMAIN-SUFFIX,quickconnect.cn,DIRECT
+DOMAIN-SUFFIX,sns.synology.com,DIRECT
+DOMAIN-SUFFIX,sns.synology.cn,DIRECT
+DOMAIN-SUFFIX,uslp.lp.cs.quickconnect.to,DIRECT
+
+# 2. 常用国内CDN直连，避免代理延迟
+DOMAIN-SUFFIX,cloudfront.net,DIRECT
+DOMAIN-SUFFIX,akamaihd.net,DIRECT
+DOMAIN-SUFFIX,alicdn.com,DIRECT
+DOMAIN-SUFFIX,bdstatic.com,DIRECT
+DOMAIN-SUFFIX,bytedance.com,DIRECT
+DOMAIN-SUFFIX,bytecdn.cn,DIRECT
+DOMAIN-SUFFIX,tencent.com,DIRECT
+DOMAIN-SUFFIX,tencentcdn.com,DIRECT
+
+# 3. 允许局域网内访问群晖服务直连
+IP-CIDR,192.168.0.0/16,DIRECT
+IP-CIDR,10.0.0.0/8,DIRECT
+IP-CIDR,172.16.0.0/12,DIRECT
+
+# 4. 直连本地回环地址
+IP-CIDR,127.0.0.0/8,DIRECT
+
+# 5. 其他所有走代理（可替换为你的代理名称）
+FINAL,Synology
+
+# --- 代理节点名替换示例 ---
+# 如果你的代理节点名字不是 PROXY，换成你的节点名
+# FINAL,你的代理synology.com
 quickconnect.to
 synology.me
