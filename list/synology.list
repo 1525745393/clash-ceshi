@@ -1,20 +1,19 @@
-# NAME: Synology
-# AUTHOR: blackmatrix7
-DOMAIN,d2f0395ykn6hxb.cloudfront.net
-DOMAIN-SUFFIX,diskstation.me
-DOMAIN-SUFFIX,dscloud.biz
-DOMAIN-SUFFIX,dscloud.me
-DOMAIN-SUFFIX,dscloud.mobi
-DOMAIN-SUFFIX,dsmunas.com
-DOMAIN-SUFFIX,dsmunas.net
-DOMAIN-SUFFIX,dsmunas.org
-DOMAIN-SUFFIX,familyds.com
-DOMAIN-SUFFIX,familyds.net
-DOMAIN-SUFFIX,familyds.org
-DOMAIN-SUFFIX,i234.me
-DOMAIN-SUFFIX,myds.com
-DOMAIN-SUFFIX,quickconnect.to
-DOMAIN-SUFFIX,synodns.com
-DOMAIN-SUFFIX,synology.cn
-DOMAIN-SUFFIX,synology.com
-DOMAIN-SUFFIX,synology.me
+# 群晖 NAS 常用直连域名规则（中国大陆可用版）
+# 更新时间：2025-08-11
+
+# 群晖官方
+DOMAIN-SUFFIX,synology.com,DIRECT
+DOMAIN-SUFFIX,synology.cn,DIRECT
+DOMAIN-SUFFIX,download.synology.com,DIRECT
+DOMAIN-SUFFIX,download.synology.cn,DIRECT
+DOMAIN-SUFFIX,update.synology.com,DIRECT
+DOMAIN-SUFFIX,update.synology.cn,DIRECT
+DOMAIN-SUFFIX,quickconnect.to,DIRECT
+DOMAIN-SUFFIX,quickconnect.cn,DIRECT
+DOMAIN-SUFFIX,sns.synology.com,DIRECT
+DOMAIN-SUFFIX,sns.synology.cn,DIRECT
+DOMAIN-SUFFIX,uslp.lp.cs.quickconnect.to,DIRECT
+
+# 常用国内 CDN 直连
+DOMAIN-SUFFIX,cloudfront.net,DIRECT
+DOMAIN-SUFFIX,akamaihd.net,DIRECT
