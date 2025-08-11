@@ -1,6 +1,3 @@
-”# 群晖设备直连规则（将 IP 替换为实际 IP）
-SRC-IP,192.168.3.6,DIRECT
-
 # Synology 域名直连
 DOMAIN,d2f0395ykn6hxb.cloudfront.net
 DOMAIN-KEYWORD,synology
