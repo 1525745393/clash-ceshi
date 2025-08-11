@@ -1,4 +1,4 @@
-# === 群晖远程访问专用代理规则示例 ===
+”# === 群晖远程访问专用代理规则示例 ===
 
 # 1. 群晖官方相关域名，直连
 DOMAIN-SUFFIX,synology.com,DIRECT
@@ -36,6 +36,4 @@ FINAL,Synology
 
 # --- 代理节点名替换示例 ---
 # 如果你的代理节点名字不是 PROXY，换成你的节点名
-# FINAL,你的代理synology.com
-quickconnect.to
-synology.me
+# FINAL,你的代理synology
