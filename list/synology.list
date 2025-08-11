@@ -15,11 +15,3 @@ DOMAIN-SUFFIX,alicdn.com,DIRECT
 DOMAIN-SUFFIX,bdstatic.com,DIRECT
 DOMAIN-SUFFIX,tencent.com,DIRECT
 DOMAIN-SUFFIX,tencentcdn.com,DIRECT
-
-# 局域网内网IP地址走直连，保障本地设备互通
-IP-CIDR,192.168.0.0/16,DIRECT
-IP-CIDR,10.0.0.0/8,DIRECT
-IP-CIDR,172.16.0.0/12,DIRECT
-
-# 本地回环地址走直连，确保系统正常通信
-IP-CIDR,127.0.0.0/8,DIRECT
