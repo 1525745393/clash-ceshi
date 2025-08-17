@@ -5,3 +5,5 @@ DOMAIN-SUFFIX,quickconnect.to
 DOMAIN-SUFFIX,quickconnect.cn
 DOMAIN-SUFFIX,sns.synology.cn
 DOMAIN-SUFFIX,uslp.lp.cs.quickconnect.to
+DOMAIN,subscribe.insight.synology.com
+DOMAIN,api.insight.synology.com
