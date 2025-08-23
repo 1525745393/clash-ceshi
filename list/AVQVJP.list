@@ -36,10 +36,24 @@ DOMAIN-SUFFIX,tameikegoro.jp
 DOMAIN-SUFFIX,to-satsu.com
 DOMAIN-SUFFIX,v-av.com
 DOMAIN-SUFFIX,wanz-factory.com
-DOMAIN-SUFFIX,xcity.jp
-DOMAIN-SUFFIX,dmm.co.jp
+DOMAIN-SUFFIX,xcity.jp# ==========================
+# DMM / FANZA 分流规则
+# 更新时间: 2025-08-23
+# 用途: Clash / SSR Plus+ / Passwall
+# ==========================
+
+# DMM 综合服务
 DOMAIN-SUFFIX,dmm.com
+DOMAIN-SUFFIX,dmm.co.jp
+
+# FANZA 成人内容
 DOMAIN-SUFFIX,fanza.jp
+DOMAIN-SUFFIX,affiliate.fanza.jp
+
+# DMM 广告/联盟
+DOMAIN-SUFFIX,ip.affiliate.dmm.com
+DOMAIN-SUFFIX,ad.dmm.com
+DOMAIN-SUFFIX,ad.fanza.jp
 # ABEMA 外部规则文件 (2025完整版)
 # 标准 Clash / Meta 兼容
 # 更新日期：2025-08
