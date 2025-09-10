@@ -78,7 +78,46 @@ DOMAIN-SUFFIX,akamaized.net
 DOMAIN,*.abematv.akamaized.net
 DOMAIN,*.vod-abematv.akamaized.net
 DOMAIN,*.ds-linear-abematv.akamaized.net
-DOMAIN-SUFFIX,cdn.mgstage.com # 若有此类 CDN 域名
-DOMAIN-SUFFIX,video.mgstage.com
-DOMAIN-SUFFIX,media.mgstage.com
-DOMAIN-SUFFIX,static.mgstage.com
+# ============================
+# mgstage 主站、资源域名与静态资源
+# ============================
+- DOMAIN-SUFFIX,mgstage.com
+- DOMAIN-SUFFIX,mgstage.net
+- DOMAIN-SUFFIX,mgstage.jp
+- DOMAIN-SUFFIX,image.mgstage.com
+- DOMAIN-SUFFIX,cdn.mgstage.com
+- DOMAIN-SUFFIX,video.mgstage.com
+- DOMAIN-SUFFIX,media.mgstage.com
+- DOMAIN-SUFFIX,static.mgstage.com
+
+# ============================
+# DMM / FANZA 主站
+# ============================
+- DOMAIN-SUFFIX,dmm.com
+- DOMAIN-SUFFIX,dmm.co.jp
+- DOMAIN-SUFFIX,dmm-extension.com
+- DOMAIN-SUFFIX,dmmstatic.com
+- DOMAIN-SUFFIX,dmmapis.com
+
+# ============================
+# DMM 联盟 / 广告 / 追踪
+# ============================
+- DOMAIN-SUFFIX,affiliate.dmm.com
+- DOMAIN,ip.affiliate.dmm.com
+
+# ============================
+# FANZA 相关域名
+# ============================
+- DOMAIN-SUFFIX,fanza.com
+- DOMAIN-SUFFIX,fanza.jp
+- DOMAIN-SUFFIX,fanza-douga.com
+- DOMAIN-SUFFIX,fanza.games
+- DOMAIN-SUFFIX,fanzaaudio.com
+- DOMAIN-SUFFIX,fanzavideo.com
+- DOMAIN-SUFFIX,fanzacdn.com
+
+# ============================
+# 常见资源 / CDN 域名
+# ============================
+- DOMAIN-SUFFIX,akamaized.net
+- DOMAIN-SUFFIX,cloudfront.net
