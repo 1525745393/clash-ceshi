@@ -78,7 +78,7 @@ DOMAIN-SUFFIX,akamaized.net
 DOMAIN,*.abematv.akamaized.net
 DOMAIN,*.vod-abematv.akamaized.net
 DOMAIN,*.ds-linear-abematv.akamaized.net
-DOMAIN-SUFFIX,cdn.mgstage.com,JP  # 若有此类 CDN 域名
-DOMAIN-SUFFIX,video.mgstage.com,JP
-DOMAIN-SUFFIX,media.mgstage.com,JP
-DOMAIN-SUFFIX,static.mgstage.com,JP
+DOMAIN-SUFFIX,cdn.mgstage.com # 若有此类 CDN 域名
+DOMAIN-SUFFIX,video.mgstage.com
+DOMAIN-SUFFIX,media.mgstage.com
+DOMAIN-SUFFIX,static.mgstage.com
