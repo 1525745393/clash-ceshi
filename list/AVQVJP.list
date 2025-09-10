@@ -79,6 +79,16 @@ DOMAIN,*.abematv.akamaized.net
 DOMAIN,*.vod-abematv.akamaized.net
 DOMAIN,*.ds-linear-abematv.akamaized.net
 # ============================
+# mgstage 主站、资源域名与静态资源
+# ============================
+- DOMAIN-SUFFIX,mgstage.com
+- DOMAIN-SUFFIX,mgstage.net
+- DOMAIN-SUFFIX,mgstage.jp
+- DOMAIN-SUFFIX,image.mgstage.com
+- DOMAIN-SUFFIX,cdn.mgstage.com
+- DOMAIN-SUFFIX,video.mgstage.com
+- DOMAIN-SUFFIX,media.mgstage.com
+- DOMAIN-SUFFIX,static.mgstage.com
 
 # ============================
 # DMM / FANZA 主站
