@@ -1,6 +1,9 @@
-8# AVQVJP.list - 日本女优站点分流规则
-# 更新时间：2025-08-01
-# 共 33 条规则，已去重并排序
+# 8# AVQVJP.list - 日本女优站点分流规则
+# 最终优化版（追加 Japan-Only）
+# 更新时间：2025-08-23
+# ==========================
+# AV-JP 日本女优站点
+# ==========================
 DOMAIN-SUFFIX,al.fanza.co.jp
 DOMAIN-SUFFIX,attackers.net
 DOMAIN-SUFFIX,av-e-body.com
@@ -36,28 +39,34 @@ DOMAIN-SUFFIX,tameikegoro.jp
 DOMAIN-SUFFIX,to-satsu.com
 DOMAIN-SUFFIX,v-av.com
 DOMAIN-SUFFIX,wanz-factory.com
-DOMAIN-SUFFIX,xcity.jp# ==========================
-# DMM / FANZA 分流规则
-# 更新时间: 2025-08-23
-# 用途: Clash / SSR Plus+ / Passwall
-# ==========================
+DOMAIN-SUFFIX,xcity.jp
 
-# DMM 综合服务
+# ==========================
+# DMM-FANZA 主站与广告
+# ==========================
 DOMAIN-SUFFIX,dmm.com
 DOMAIN-SUFFIX,dmm.co.jp
-
-# FANZA 成人内容
+DOMAIN-SUFFIX,dmm-extension.com
+DOMAIN-SUFFIX,dmmstatic.com
+DOMAIN-SUFFIX,dmmapis.com
 DOMAIN-SUFFIX,fanza.jp
-DOMAIN-SUFFIX,affiliate.fanza.jp
+DOMAIN-SUFFIX,fanza.com
+DOMAIN-SUFFIX,fanza-douga.com
+DOMAIN-SUFFIX,fanza.games
+DOMAIN-SUFFIX,fanzaaudio.com
+DOMAIN-SUFFIX,fanzavideo.com
+DOMAIN-SUFFIX,fanzacdn.com
 
-# DMM 广告/联盟
-DOMAIN-SUFFIX,ip.affiliate.dmm.com
+# DMM / FANZA 联盟与广告
+DOMAIN-SUFFIX,affiliate.dmm.com
+DOMAIN,ip.affiliate.dmm.com
 DOMAIN-SUFFIX,ad.dmm.com
 DOMAIN-SUFFIX,ad.fanza.jp
-# ABEMA 外部规则文件 (2025完整版)
-# 标准 Clash / Meta 兼容
-# 更新日期：2025-08
+DOMAIN-SUFFIX,affiliate.fanza.jp
 
+# ==========================
+# ABEMA 视频及广告
+# ==========================
 DOMAIN-SUFFIX,abema.tv
 DOMAIN-SUFFIX,abema-tv.com
 DOMAIN,api.abema.io
@@ -74,13 +83,14 @@ DOMAIN,abema-adx.ameba.jp
 DOMAIN-SUFFIX,ameba.jp
 DOMAIN-SUFFIX,akamaized.net
 
-# ★以下仅 Clash.Meta 支持，如不使用Meta建议注释
+# ★仅 Clash.Meta 支持，如不使用Meta可注释
 DOMAIN,*.abematv.akamaized.net
 DOMAIN,*.vod-abematv.akamaized.net
 DOMAIN,*.ds-linear-abematv.akamaized.net
-# ============================
-# mgstage 主站、资源域名与静态资源
-# ============================
+
+# ==========================
+# MGStage 主站及资源（直连/黑名单）
+# ==========================
 - DOMAIN-SUFFIX,mgstage.com
 - DOMAIN-SUFFIX,mgstage.net
 - DOMAIN-SUFFIX,mgstage.jp
@@ -90,34 +100,44 @@ DOMAIN,*.ds-linear-abematv.akamaized.net
 - DOMAIN-SUFFIX,media.mgstage.com
 - DOMAIN-SUFFIX,static.mgstage.com
 
-# ============================
-# DMM / FANZA 主站
-# ============================
-- DOMAIN-SUFFIX,dmm.com
-- DOMAIN-SUFFIX,dmm.co.jp
-- DOMAIN-SUFFIX,dmm-extension.com
-- DOMAIN-SUFFIX,dmmstatic.com
-- DOMAIN-SUFFIX,dmmapis.com
-
-# ============================
-# DMM 联盟 / 广告 / 追踪
-# ============================
-- DOMAIN-SUFFIX,affiliate.dmm.com
-- DOMAIN,ip.affiliate.dmm.com
-
-# ============================
-# FANZA 相关域名
-# ============================
-- DOMAIN-SUFFIX,fanza.com
-- DOMAIN-SUFFIX,fanza.jp
-- DOMAIN-SUFFIX,fanza-douga.com
-- DOMAIN-SUFFIX,fanza.games
-- DOMAIN-SUFFIX,fanzaaudio.com
-- DOMAIN-SUFFIX,fanzavideo.com
-- DOMAIN-SUFFIX,fanzacdn.com
-
-# ============================
-# 常见资源 / CDN 域名
-# ============================
+# ==========================
+# 常用 CDN / 静态资源（直连/黑名单）
+# ==========================
 - DOMAIN-SUFFIX,akamaized.net
 - DOMAIN-SUFFIX,cloudfront.net
+
+# ==========================
+# Japan-Only 仅日本访问域名（追加在末尾）
+# ==========================
+DOMAIN-SUFFIX,dmmgames.com,JAPAN
+DOMAIN-SUFFIX,dmmplay.com,JAPAN
+DOMAIN-SUFFIX,dmmwallet.com,JAPAN
+DOMAIN-SUFFIX,fanza-douga.com,JAPAN
+DOMAIN-SUFFIX,fanzacdn.com,JAPAN
+DOMAIN-SUFFIX,fanzavideo.com,JAPAN
+DOMAIN-SUFFIX,fanzaaudio.com,JAPAN
+
+DOMAIN,api.abema.io,JAPAN
+DOMAIN,log.abema.io,JAPAN
+DOMAIN,ws-abema-production.abema.io,JAPAN
+DOMAIN,ssl-pub.abema.io,JAPAN
+DOMAIN,ds-linear-abematv.akamaized.net,JAPAN
+DOMAIN,vod-abematv.akamaized.net,JAPAN
+DOMAIN,abematv.akamaized.net,JAPAN
+DOMAIN,contents-abematv.akamaized.net,JAPAN
+DOMAIN,playback-abematv.akamaized.net,JAPAN
+DOMAIN,d-xx.cdn.abema-tv.com,JAPAN
+
+DOMAIN-SUFFIX,mgstage.com,JAPAN
+DOMAIN-SUFFIX,mgstage.net,JAPAN
+DOMAIN-SUFFIX,mgstage.jp,JAPAN
+
+DOMAIN-SUFFIX,al.fanza.co.jp,JAPAN
+DOMAIN-SUFFIX,av-opera.jp,JAPAN
+DOMAIN-SUFFIX,dahlia-av.jp,JAPAN
+DOMAIN-SUFFIX,faleno.jp,JAPAN
+DOMAIN-SUFFIX,giga-web.jp,JAPAN
+DOMAIN-SUFFIX,honnaka.jp,JAPAN
+DOMAIN-SUFFIX,mvg.jp,JAPAN
+DOMAIN-SUFFIX,rookie-av.jp,JAPAN
+DOMAIN-SUFFIX,xcity.jp,JAPAN
