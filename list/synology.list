@@ -8,27 +8,3 @@ DOMAIN-SUFFIX,uslp.lp.cs.quickconnect.to
 DOMAIN,subscribe.insight.synology.com
 DOMAIN,api.insight.synology.com
 DOMAIN,glitchtip.hanxi.cc
-# ===== Synology DSM NTP 国内直连 =====
-# 确保 NAS 时间同步稳定，不走代理
-
-# 阿里云 NTP
-DOMAIN-SUFFIX,ntp.aliyun.com,DIRECT
-DOMAIN-SUFFIX,ntp1.aliyun.com,DIRECT
-DOMAIN-SUFFIX,ntp2.aliyun.com,DIRECT
-DOMAIN-SUFFIX,ntp3.aliyun.com,DIRECT
-DOMAIN-SUFFIX,ntp4.aliyun.com,DIRECT
-
-# 腾讯 NTP
-DOMAIN-SUFFIX,ntp.tencent.com,DIRECT
-DOMAIN-SUFFIX,ntp1.tencent.com,DIRECT
-DOMAIN-SUFFIX,ntp2.tencent.com,DIRECT
-DOMAIN-SUFFIX,ntp3.tencent.com,DIRECT
-
-# 国家授时中心
-DOMAIN-SUFFIX,ntp.ntsc.ac.cn,DIRECT
-
-# 全球 NTP 池中国节点
-DOMAIN-SUFFIX,cn.pool.ntp.org,DIRECT
-
-# 微软时间服务器（国内可访问性一般）
-DOMAIN-SUFFIX,time.windows.com,DIRECT
