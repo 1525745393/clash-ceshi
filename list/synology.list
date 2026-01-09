@@ -1,4 +1,4 @@
-”# === 群晖远程访问专用代理规则示例 ===
+DOMAIN-SUFFIX,ntp2.aliyun.com”# === 群晖远程访问专用代理规则示例 ===
 
 # 1. 群晖官方相关域名，直连
 DOMAIN-SUFFIX,quickconnect.to
@@ -123,3 +123,4 @@ DOMAIN-SUFFIX,time7.aliyun.com
 DOMAIN-SUFFIX,time7.apple.com
 DOMAIN-SUFFIX,tw.ntp.org.cn
 DOMAIN-SUFFIX,us.ntp.org.cn
+DOMAIN-SUFFIX,st.stga.cn
