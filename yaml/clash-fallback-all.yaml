@@ -26,15 +26,7 @@ proxy-providers:
       interval: 300
     proxy: 直连 
     
- # 小牛:
-   # url: "https://m.beupisp.com/sub?target=clash&url=https%3A%2F%2Fi.stga.cn%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3Deb1008f06294c27100587e8cd829a817&insert=false"
-   # type: http
-   # interval: 86400
-    #health-check:
-     # enable: true
-     # url: https://www.gstatic.com/generate_204
-     # interval: 300
-   # proxy: 直连    
+ 
 
   PolYun:
     url: "机场订阅地址"
