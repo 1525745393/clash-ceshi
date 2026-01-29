@@ -1,0 +1,6 @@
+# AVTH Thailand Rules List
+# 格式: DOMAIN-SUFFIX,域名
+# 示例:
+# DOMAIN-SUFFIX,line.me
+# DOMAIN-SUFFIX,ais.co.th
+# DOMAIN-SUFFIX,trueid.net
