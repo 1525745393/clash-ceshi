@@ -1,0 +1,6 @@
+# AVIN India Rules List
+# 格式: DOMAIN-SUFFIX,域名
+# 示例:
+# DOMAIN-SUFFIX,hotstar.com
+# DOMAIN-SUFFIX,jiocinema.com
+# DOMAIN-SUFFIX,airtel.in
