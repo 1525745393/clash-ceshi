@@ -1,13 +1,10 @@
+# Clash-ALL 优化配置 (自动化模板)
 # ========================
-# Clash-ALL 优化配置
-# ========================
-
-# 机场节点订阅
 
 proxy-providers:
 
   Mitce机场:
-    url: "机场订阅地址"
+    url: "${{ secrets.MITCE_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -17,16 +14,16 @@ proxy-providers:
     proxy: 直连 
 
   HK-BEUP:
-    url: "机场订阅地址"
+    url: "${{ secrets.HKBEUP_URL }}"
     type: http
     interval: 86400
     health-check:
       enable: true
-      url: 
-https://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 直连 
 
+# ... (此处往下请粘贴您原本 clash-fallback-all.yaml 从第 101 行开始的所有内容
 proxies:
   - {name: 直连, type: direct}
   - {name: 拒绝, type: reject}
