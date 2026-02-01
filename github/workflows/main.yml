@@ -1,0 +1,61 @@
+name: Generate Clash Config
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # 每天凌晨自动运行一次
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate Final Config
+        run: |
+          python3 -c "
+          import os
+          template_path = 'yaml/clash-template.yaml'
+          output_path = 'yaml/clash-fallback-all.yaml'
+          
+          with open(template_path, 'r', encoding='utf-8') as f:
+              content = f.read()
+          
+          replacements = {
+              '\${{ secrets.MITCE_URL }}': os.environ.get('MITCE_URL', '机场订阅地址'),
+              '\${{ secrets.HKBEUP_URL }}': os.environ.get('HKBEUP_URL', '机场订阅地址'),
+              '\${{ secrets.POLYUN_URL }}': os.environ.get('POLYUN_URL', '机场订阅地址'),
+              '\${{ secrets.WUJIE_URL }}': os.environ.get('WUJIE_URL', '机场订阅地址'),
+              '\${{ secrets.MAOER_URL }}': os.environ.get('MAOER_URL', '机场订阅地址'),
+              '\${{ secrets.KUAIMAO_URL }}': os.environ.get('KUAIMAO_URL', '机场订阅地址'),
+              '\${{ secrets.BESTVPN_URL }}': os.environ.get('BESTVPN_URL', '机场订阅地址'),
+              '\${{ secrets.NIUBI_URL }}': os.environ.get('NIUBI_URL', '机场订阅地址')
+          }
+          
+          for placeholder, value in replacements.items():
+              content = content.replace(placeholder, value)
+          
+          with open(output_path, 'w', encoding='utf-8') as f:
+              f.write(content)
+          "
+        env:
+          MITCE_URL: ${{ secrets.MITCE_URL }}
+          HKBEUP_URL: ${{ secrets.HKBEUP_URL }}
+          POLYUN_URL: ${{ secrets.POLYUN_URL }}
+          WUJIE_URL: ${{ secrets.WUJIE_URL }}
+          MAOER_URL: ${{ secrets.MAOER_URL }}
+          KUAIMAO_URL: ${{ secrets.KUAIMAO_URL }}
+          BESTVPN_URL: ${{ secrets.BESTVPN_URL }}
+          NIUBI_URL: ${{ secrets.NIUBI_URL }}
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email \"github-actions[bot]@users.noreply.github.com\"
+          git config --local user.name \"github-actions[bot]\"
+          git add yaml/clash-fallback-all.yaml
+          git commit -m \"Auto-generate final clash config [skip ci]\" || echo \"No changes to commit\"
+          git push origin main
