@@ -1,13 +1,10 @@
+# Clash-ALL 优化配置 (自动化模板)
 # ========================
-# Clash-ALL 优化配置
-# ========================
-
-# 机场节点订阅
 
 proxy-providers:
 
   Mitce机场:
-    url: "机场订阅地址"
+    url: "${{ secrets.MITCE_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -17,7 +14,7 @@ proxy-providers:
     proxy: 直连 
 
   HK-BEUP:
-    url: "机场订阅地址"
+    url: "${{ secrets.HKBEUP_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -25,19 +22,9 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 直连 
-    
- # 小牛:
-   # url: "https://m.beupisp.com/sub?target=clash&url=https%3A%2F%2Fi.stga.cn%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3Deb1008f06294c27100587e8cd829a817&insert=false"
-   # type: http
-   # interval: 86400
-    #health-check:
-     # enable: true
-     # url: https://www.gstatic.com/generate_204
-     # interval: 300
-   # proxy: 直连    
 
   PolYun:
-    url: "机场订阅地址"
+    url: "${{ secrets.POLYUN_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -47,7 +34,7 @@ proxy-providers:
     proxy: 直连
 
   无界云:
-    url: "机场订阅地址"
+    url: "${{ secrets.WUJIE_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -57,7 +44,7 @@ proxy-providers:
     proxy: 直连
    
   猫耳:
-    url: "机场订阅地址"
+    url: "${{ secrets.MAOER_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -67,7 +54,7 @@ proxy-providers:
     proxy: 直连   
 
   快猫:
-    url: "机场订阅地址"
+    url: "${{ secrets.KUAIMAO_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -77,7 +64,7 @@ proxy-providers:
     proxy: 直连    
     
   BestVPN:
-    url: "机场订阅地址"
+    url: "${{ secrets.BESTVPN_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -87,7 +74,7 @@ proxy-providers:
     proxy: 直连    
 
   牛逼:
-    url: "机场订阅地址"
+    url: "${{ secrets.NIUBI_URL }}"
     type: http
     interval: 86400
     health-check:
@@ -95,6 +82,9 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 直连      
+
+# ... (此处往下请粘贴您原本 clash-fallback-all.yaml 从第 101 行开始的所有内容)
+      
 
 
 
