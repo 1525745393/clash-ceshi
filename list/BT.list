@@ -1,1 +1,17 @@
-BT下载流量直连
+# 规则：BT 下载流量直连
+# 作者: 由 GitHub Copilot Chat Assistant 自动生成
+# 用于配置 Clash，识别与 BT 流量相关的域名和 IP
+
+RULE-SET:
+  # BT 相关的域名规则
+  - DOMAIN-SUFFIX,tracker.bt.com,DIRECT
+  - DOMAIN-SUFFIX,tracker.example-bt.io,DIRECT
+  - DOMAIN-SUFFIX,bittorrent.net,DIRECT
+  - DOMAIN-KEYWORD,bt,DIRECT
+  - DOMAIN-KEYWORD,torrent,DIRECT
+
+  # BT 相关的 IP (此为示例，请替换为真实地址)
+  - IP-CIDR,192.168.1.0/24,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+
+MATCH,DIRECT  # 匹配的最终流量直连
