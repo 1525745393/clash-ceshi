@@ -3,6 +3,7 @@
 
 proxy-providers:
 
+  
   Mitce机场:
     url: "${{ secrets.MITCE_URL }}"
     type: http
@@ -23,7 +24,6 @@ proxy-providers:
       interval: 300
     proxy: 直连 
 
-# ... (此处往下请粘贴您原本 clash-fallback-all.yaml 从第 101 行开始的所有内容
 proxies:
   - {name: 直连, type: direct}
   - {name: 拒绝, type: reject}
