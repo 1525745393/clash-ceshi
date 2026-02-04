@@ -26,8 +26,8 @@ jobs:
               content = f.read()
           
           replacements = {
-              '\${{ secrets.MITCE_URL }}': os.environ.get('MITCE_URL', '机场订阅地址'),
-              '\${{ secrets.HKBEUP_URL }}': os.environ.get('HKBEUP_URL', '机场订阅地址')
+              '${{ secrets.MITCE_URL }}': os.environ.get('MITCE_URL', '机场订阅地址'),
+              '${{ secrets.HKBEUP_URL }}': os.environ.get('HKBEUP_URL', '机场订阅地址')
           }
           
           for placeholder, value in replacements.items():
