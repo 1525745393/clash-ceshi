@@ -123,13 +123,13 @@ DOMAIN-SUFFIX,time7.aliyun.com
 DOMAIN-SUFFIX,time7.apple.com
 DOMAIN-SUFFIX,tw.ntp.org.cn
 DOMAIN-SUFFIX,us.ntp.org.cn
-SRC-IP-CIDR,192.168.3.6/32
+#SRC-IP-CIDR,192.168.3.6/32
   # ↑↑↑ 修改为你的群晖 IP，例如 192.168.1.10
 
   # ------------------------
   # BT / PT / 迅雷 永久直连
   # ------------------------
-  DOMAIN-KEYWORD,tracker
-  DOMAIN-KEYWORD,announce
-  DST-PORT,63219-63220
-  DST-PORT,51413
+DOMAIN-KEYWORD,tracker
+DOMAIN-KEYWORD,announce
+DST-PORT,63219-63220
+DST-PORT,51413
