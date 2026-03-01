@@ -109,35 +109,34 @@ DOMAIN,*.ds-linear-abematv.akamaized.net
 # ==========================
 # Japan-Only 仅日本访问域名（追加在末尾）
 # ==========================
-DOMAIN-SUFFIX,dmmgames.com,JAPAN
-DOMAIN-SUFFIX,dmmplay.com,JAPAN
-DOMAIN-SUFFIX,dmmwallet.com,JAPAN
-DOMAIN-SUFFIX,fanza-douga.com,JAPAN
-DOMAIN-SUFFIX,fanzacdn.com,JAPAN
-DOMAIN-SUFFIX,fanzavideo.com,JAPAN
-DOMAIN-SUFFIX,fanzaaudio.com,JAPAN
+DOMAIN-SUFFIX,dmmgames.com
+DOMAIN-SUFFIX,dmmplay.com
+DOMAIN-SUFFIX,dmmwallet.com
+DOMAIN-SUFFIX,fanza-douga.com
+DOMAIN-SUFFIX,fanzacdn.com
+DOMAIN-SUFFIX,fanzavideo.com
+DOMAIN-SUFFIX,fanzaaudio.com
 
-DOMAIN,api.abema.io,JAPAN
-DOMAIN,log.abema.io,JAPAN
-DOMAIN,ws-abema-production.abema.io,JAPAN
-DOMAIN,ssl-pub.abema.io,JAPAN
-DOMAIN,ds-linear-abematv.akamaized.net,JAPAN
-DOMAIN,vod-abematv.akamaized.net,JAPAN
-DOMAIN,abematv.akamaized.net,JAPAN
-DOMAIN,contents-abematv.akamaized.net,JAPAN
-DOMAIN,playback-abematv.akamaized.net,JAPAN
-DOMAIN,d-xx.cdn.abema-tv.com,JAPAN
+DOMAIN,api.abema.io
+DOMAIN,log.abema.io
+DOMAIN,ws-abema-production.abema.io
+DOMAIN,ssl-pub.abema.io
+DOMAIN,ds-linear-abematv.akamaized.net
+DOMAIN,vod-abematv.akamaized.net
+DOMAIN,abematv.akamaized.net
+DOMAIN,contents-abematv.akamaized.net
+DOMAIN,playback-abematv.akamaized.net
+DOMAIN,d-xx.cdn.abema-tv.com
+DOMAIN-SUFFIX,mgstage.com
+DOMAIN-SUFFIX,mgstage.net
+DOMAIN-SUFFIX,mgstage.jp
 
-DOMAIN-SUFFIX,mgstage.com,JAPAN
-DOMAIN-SUFFIX,mgstage.net,JAPAN
-DOMAIN-SUFFIX,mgstage.jp,JAPAN
-
-DOMAIN-SUFFIX,al.fanza.co.jp,JAPAN
-DOMAIN-SUFFIX,av-opera.jp,JAPAN
-DOMAIN-SUFFIX,dahlia-av.jp,JAPAN
-DOMAIN-SUFFIX,faleno.jp,JAPAN
-DOMAIN-SUFFIX,giga-web.jp,JAPAN
-DOMAIN-SUFFIX,honnaka.jp,JAPAN
-DOMAIN-SUFFIX,mvg.jp,JAPAN
-DOMAIN-SUFFIX,rookie-av.jp,JAPAN
-DOMAIN-SUFFIX,xcity.jp,JAPAN
+DOMAIN-SUFFIX,al.fanza.co.jp
+DOMAIN-SUFFIX,av-opera.jp
+DOMAIN-SUFFIX,dahlia-av.jp
+DOMAIN-SUFFIX,faleno.jp
+DOMAIN-SUFFIX,giga-web.jp
+DOMAIN-SUFFIX,honnaka.jp
+DOMAIN-SUFFIX,mvg.jp
+DOMAIN-SUFFIX,rookie-av.jp
+DOMAIN-SUFFIX,xcity.jp
