@@ -1,0 +1,58 @@
+# 软路由专用
+# OpenClash DNS 覆写模块配置
+# 功能：国内外 DNS 分流、防 DNS 泄露、防 DNS 污染
+
+[General]
+CORE_TYPE = Meta
+# --- DNS 基础设置 ---
+ENABLE_REDIRECT_DNS = 1
+ENABLE_CUSTOM_DNS = 1
+APPEND_DEFAULT_DNS = 0
+APPEND_WAN_DNS = 0
+STORE_FAKEIP = 1
+CUSTOM_FAKEIP_FILTER = 1
+CUSTOM_FAKEIP_FILTER_MODE = blacklist
+FAKEIP_RANGE = 198.18.0.1/16
+ENABLE_RESPECT_RULES = 1
+CUSTOM_NAME_POLICY = 1
+CUSTOM_HOST = 1
+CUSTOM_FALLBACK_FILTER = 1
+
+# --- 代理与模式 ---
+EN_MODE = fake-ip-mix
+DISABLE_UDP_QUIC = 1
+ROUTER_SELF_PROXY = 1
+PROXY_MODE = rule
+STACK_TYPE = system
+
+# --- 分流与安全 ---
+CHINA_IP_ROUTE = 1
+ENABLE_META_SNIFFER = 1
+ENABLE_META_SNIFFER_CUSTOM = 1
+ENABLE_META_SNIFFER_PURE_IP = 1
+ENABLE_TCP_CONCURRENT = 1
+SKIP_PROXY_ADDRESS = 1
+
+[Overwrite]
+# 使用 Ruby 脚本进行精细化 DNS 覆写
+# 设置 DNS 解析策略：国内外分流
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['enable']" "true"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipv6']" "false"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['enhanced-mode']" "fake-ip"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fake-ip-range']" "198.18.0.1/16"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['listen']" "0.0.0.0:7874"
+
+# 配置 nameserver (国内 DNS，用于解析国内域名)
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
+
+# 配置 fallback (国外加密 DNS，用于解析国外域名，防止污染和泄露)
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback']" "['https://dns.google/dns-query', 'https://1.1.1.1/dns-query', 'tls://8.8.8.8', 'tls://1.1.1.1']"
+
+# 配置 fallback-filter (防泄露关键：GEOIP 不在 CN 的走 fallback)
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback-filter']" "['geoip']" "true"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback-filter']" "['geoip-code']" "CN"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback-filter']" "['ipcidr']" "['240.0.0.0/4']"
+
+# 针对特定域名的分流 (nameserver-policy)
+# 国内常用域名强制走国内 DNS
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver-policy']" "{'geosite:cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:geolocation-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']}"
