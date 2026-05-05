@@ -1,0 +1,30 @@
+# 软路由专用
+# OpenClash DNS 配置
+# 功能：国内外 DNS 分流、防 DNS 泄露、防 DNS 污染
+
+dns:
+  enable: true
+  ipv6: false
+  "enhanced-mode": fake-ip
+  "fake-ip-range": 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  fallback:
+    - https://dns.google/dns-query
+    - https://1.1.1.1/dns-query
+    - tls://8.8.8.8
+    - tls://1.1.1.1
+  "fallback-filter":
+    geoip: true
+    "geoip-code": CN
+    ipcidr:
+      - 240.0.0.0/4
+  "nameserver-policy":
+    "geosite:cn":
+      - https://dns.alidns.com/dns-query
+      - https://doh.pub/dns-query
+    "geosite:geolocation-cn":
+      - https://dns.alidns.com/dns-query
+      - https://doh.pub/dns-query
