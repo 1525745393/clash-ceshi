@@ -1,18 +1,2 @@
-# AV资源站.list - 日本 AV 资源站、索引站域名列表
-# 更新时间：2025-08-01
-# 用于分流资源站，建议单独作为一个规则集
-# 共 10 条规则
-
-DOMAIN-SUFFIX,airav.wiki
-DOMAIN-SUFFIX,av-wiki.net
-DOMAIN-SUFFIX,cableav.tv
-DOMAIN-SUFFIX,cnmdb.net
-DOMAIN-SUFFIX,fc2club.top
-DOMAIN-SUFFIX,javten.com
-DOMAIN-SUFFIX,lulubar.co
-DOMAIN-SUFFIX,yesjav.info
-DOMAIN-SUFFIX,avsox.click
-DOMAIN-SUFFIX,missav.ws
-DOMAIN-SUFFIX,getchu.com
-DOMAIN-SUFFIX,trae.ai
-DOMAIN-SUFFIX,missav.ai
+#直连
+DOMAIN-SUFFIX,xchina001.online
