@@ -14,6 +14,7 @@ DOMAIN-SUFFIX,paycalling.com
 DOMAIN-SUFFIX,gg5.co
 DOMAIN-SUFFIX,airav.wiki
 DOMAIN-SUFFIX,av-wiki.net
+DOMAIN-SUFFIX,cnmdb.net
 # NTP 时间同步必须直连
 DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-KEYWORD,ntp
