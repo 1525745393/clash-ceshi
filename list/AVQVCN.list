@@ -7,6 +7,8 @@ DOMAIN-SUFFIX,xchina.co
 DOMAIN-SUFFIX,missav.ai
 DOMAIN-SUFFIX,c97k.com
 DOMAIN-SUFFIX,javdb570.com
+DOMAIN-SUFFIX,fc2hub.com
+DOMAIN-SUFFIX,javten.com
 # NTP 时间同步必须直连
 DOMAIN-SUFFIX,pool.ntp.org
 DOMAIN-KEYWORD,ntp
