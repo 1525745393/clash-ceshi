@@ -1,0 +1,66 @@
+# 软路由专用 (中国环境深度优化版)
+# 功能：国内外 DNS 精准分流、防 DNS 泄露、防 DNS 污染、CDN 加速
+# 适配：OpenClash Meta 内核, Fake-IP (TUN) 模式
+# 参考用户提供的 default.txt 示例格式生成
+
+[General]
+CORE_TYPE = Meta
+# --- DNS 基础设置 ---
+ENABLE_REDIRECT_DNS = 1
+ENABLE_CUSTOM_DNS = 1
+APPEND_DEFAULT_DNS = 0
+APPEND_WAN_DNS = 0
+STORE_FAKEIP = 1
+CUSTOM_FAKEIP_FILTER = 1
+CUSTOM_FAKEIP_FILTER_MODE = blacklist
+FAKEIP_RANGE = 198.18.0.1/16
+ENABLE_RESPECT_RULES = 1
+CUSTOM_NAME_POLICY = 1
+CUSTOM_HOST = 1
+CUSTOM_FALLBACK_FILTER = 1
+
+# --- 运行模式：Fake-IP (TUN) ---
+EN_MODE = fake-ip-tun
+PROXY_MODE = rule
+STACK_TYPE = system
+ROUTER_SELF_PROXY = 1
+
+# --- 中国环境优化开关 ---
+CHINA_IP_ROUTE = 1            # 绕过中国 IP，直连更稳定
+DISABLE_UDP_QUIC = 1          # 禁用 QUIC，防止运营商限速
+CHNR_AUTO_UPDATE = 1          # 自动更新大陆 IP 列表
+CHNR_UPDATE_WEEK_TIME = *
+CHNR_UPDATE_DAY_TIME = 4
+
+# --- Meta 内核安全与性能 ---
+ENABLE_META_SNIFFER = 1
+ENABLE_META_SNIFFER_CUSTOM = 1
+ENABLE_META_SNIFFER_PURE_IP = 1
+ENABLE_TCP_CONCURRENT = 1
+GLOBAL_CLIENT_FINGERPRINT = chrome
+RESTART = true
+
+[Overwrite]
+# --- DNS 核心逻辑覆写 ---
+# 1. 基础配置
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['enable']" "true"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipv6']" "false"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['enhanced-mode']" "fake-ip"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['listen']" "0.0.0.0:7874"
+
+# 2. 国内解析 (nameserver): 阿里 & 腾讯 DoH，确保 CDN 准确
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
+
+# 3. 国外解析 (fallback): Google & Cloudflare 加密 DNS，彻底解决污染
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback']" "['https://dns.google/dns-query', 'https://1.1.1.1/dns-query', 'tls://8.8.8.8', 'tls://1.1.1.1']"
+
+# 4. 代理服务器解析 (proxy-server-nameserver): 保护机场节点解析隐私
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['proxy-server-nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
+
+# 5. 防泄露逻辑 (fallback-filter)
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback-filter']" "['geoip']" "true"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['geoip-code']" "CN"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipcidr']" "['240.0.0.0/4']"
+
+# 6. 域名策略 (nameserver-policy): 强制国内 Geosite 走国内 DNS
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver-policy']" "{'geosite:cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:geolocation-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']}"
