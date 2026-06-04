@@ -1,50 +1,72 @@
-# OpenClash Overwrite Module
-# Optimized for Meta Core, TUN Mode, China Environment, and NAS
+# ==========================================================
+# OpenClash 终极优化覆写模块 (详细注释版)
+# 适配：Meta 内核, TUN 模式, 中国环境, NAS 兼容
+# ==========================================================
 
 [General]
-CORE_TYPE = Meta
-EN_MODE = fake-ip-tun
-PROXY_MODE = rule
-STACK_TYPE = gvisor
-RESTART = true
+CORE_TYPE = Meta              # 使用 Meta 内核
+EN_MODE = fake-ip-tun         # Fake-IP (TUN) 模式
+PROXY_MODE = rule             # 规则分流模式
+STACK_TYPE = gvisor           # 使用 gvisor 协议栈，对 NAS 更友好
+RESTART = true                # 更新后自动重启
+
+# --- IPv6 设置：彻底关闭以防泄露 ---
 IPV6_ENABLE = 0
 IPV6_DNS = 0
 CHINA_IP6_ROUTE = 0
-ENABLE_REDIRECT_DNS = 1
-ENABLE_CUSTOM_DNS = 1
-APPEND_DEFAULT_DNS = 0
-APPEND_WAN_DNS = 0
-STORE_FAKEIP = 1
-FAKEIP_RANGE = 198.20.0.1/16
-CUSTOM_FAKEIP_FILTER = 1
+
+# --- DNS 基础设置 ---
+ENABLE_REDIRECT_DNS = 1       # 劫持局域网 DNS
+ENABLE_CUSTOM_DNS = 1         # 使用自定义 DNS
+APPEND_DEFAULT_DNS = 0        # 不追加运营商 DNS
+STORE_FAKEIP = 1              # 存储 Fake-IP 缓存
+FAKEIP_RANGE = 198.20.0.1/16  # 对齐原配置 IP 段
+CUSTOM_FAKEIP_FILTER = 1      # 启用 Fake-IP 过滤
 CUSTOM_FAKEIP_FILTER_MODE = blacklist
-ENABLE_RESPECT_RULES = 1
-CUSTOM_FALLBACK_FILTER = 1
-CHINA_IP_ROUTE = 1
-DISABLE_UDP_QUIC = 1
-INTRANET_ALLOWED = 1
-ROUTER_SELF_PROXY = 1
-ENABLE_TCP_CONCURRENT = 1
-ENABLE_UNIFIED_DELAY = 1
-GLOBAL_CLIENT_FINGERPRINT = chrome
-CHNR_AUTO_UPDATE = 1
-GEOIP_AUTO_UPDATE = 1
-GEOSITE_AUTO_UPDATE = 1
-ENABLE_META_SNIFFER = 1
-ENABLE_META_SNIFFER_CUSTOM = 1
+ENABLE_RESPECT_RULES = 1      # 解析遵循规则
+CUSTOM_FALLBACK_FILTER = 1    # 启用防泄露过滤
+
+# --- 中国环境与性能优化 ---
+CHINA_IP_ROUTE = 1            # 绕过中国 IP 直连
+DISABLE_UDP_QUIC = 1          # 禁用 QUIC 防止限速
+INTRANET_ALLOWED = 1          # 允许内网访问 (NAS 必备)
+ROUTER_SELF_PROXY = 1         # 路由器自身走代理
+ENABLE_TCP_CONCURRENT = 1     # TCP 并发连接加速
+ENABLE_UNIFIED_DELAY = 1      # 统一延迟显示
+GLOBAL_CLIENT_FINGERPRINT = chrome # 模拟浏览器指纹
+
+# --- 自动更新与流量嗅探 ---
+CHNR_AUTO_UPDATE = 1          # 自动更新大陆 IP 列表
+GEOIP_AUTO_UPDATE = 1         # 自动更新 GeoIP
+GEOSITE_AUTO_UPDATE = 1       # 自动更新 GeoSite
+ENABLE_META_SNIFFER = 1       # 开启流量嗅探
+ENABLE_META_SNIFFER_CUSTOM = 1 
 ENABLE_META_SNIFFER_PURE_IP = 1
 
 [Overwrite]
+# --- DNS 核心逻辑覆写脚本 ---
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['enable']" "true"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipv6']" "false"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['enhanced-mode']" "fake-ip"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['fake-ip-range']" "198.20.0.1/16"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['listen']" "0.0.0.0:7874"
+
+# 1. 国内 DNS: 阿里/腾讯 DoH (获取最佳 CDN 节点)
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
+
+# 2. 国外 DNS: Google/Cloudflare DoH (防污染)
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback']" "['https://dns.google/dns-query', 'https://1.1.1.1/dns-query', 'tls://8.8.8.8', 'tls://1.1.1.1']"
+
+# 3. 节点域名解析: 保护机场连接隐私
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['proxy-server-nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
+
+# 4. 域名分流策略: 强制国内域名与 NAS 域名直连
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver-policy']" "{'geosite:cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:geolocation-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:apple-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'domain:synology.me': ['119.29.29.29', '223.5.5.5'], 'domain:myqnapcloud.com': ['119.29.29.29', '223.5.5.5'], 'domain:quickconnect.to': ['119.29.29.29', '223.5.5.5']}"
+
+# 5. 防泄露过滤: 确保国外域名解析结果纯净
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback-filter']" "['geoip']" "true"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['geoip-code']" "CN"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipcidr']" "['240.0.0.0/4']"
+
+# 6. Fake-IP 过滤: 解决 NAS/银行/机场官网等兼容性问题
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['fake-ip-filter']" "['+.lan', '+.local', 'geosite:cn', '+.synology.me', '+.myqnapcloud.com', '+.quickconnect.to', '+.km688.ink', '+.onesubv.site', '+.oneyyds.online', '+.xiaoniuyun.cc', '+.apple-bing.sbs', '+.ynhtbank.com', '+.qeayr.cn', '+.saojc.xyz', '+.dler.cloud', '+.aerianas.top', '+.wxda.net', 'localhost']"
