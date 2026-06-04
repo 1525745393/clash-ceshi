@@ -1,10 +1,15 @@
-# 软路由专用 (中国环境深度优化版)
+# 软路由专用 (中国环境深度优化版 - 已禁用 IPv6)
 # 功能：国内外 DNS 精准分流、防 DNS 泄露、防 DNS 污染、CDN 加速
 # 适配：OpenClash Meta 内核, Fake-IP (TUN) 模式
 # 参考用户提供的 default.txt 示例格式生成
 
 [General]
 CORE_TYPE = Meta
+# --- IPv6 设置：已彻底关闭 ---
+IPV6_ENABLE = 0
+IPV6_DNS = 0
+CHINA_IP6_ROUTE = 0
+
 # --- DNS 基础设置 ---
 ENABLE_REDIRECT_DNS = 1
 ENABLE_CUSTOM_DNS = 1
@@ -44,7 +49,7 @@ RESTART = true
 # --- DNS 核心逻辑覆写 ---
 # 1. 基础配置
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['enable']" "true"
-ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipv6']" "false"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipv6']" "false"  # 强制 DNS 不解析 IPv6
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['enhanced-mode']" "fake-ip"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['listen']" "0.0.0.0:7874"
 
