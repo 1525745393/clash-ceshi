@@ -1,75 +1,74 @@
-# 软路由专用 (NAS 兼容增强版 - 已禁用 IPv6)
-# 功能：国内外 DNS 精准分流、防 DNS 泄露、防 DNS 污染、NAS 访问优化
+# 软路由专用 (精简注释版)
+# 功能：国内外 DNS 分流、防泄露污染、NAS 兼容
 # 适配：OpenClash Meta 内核, Fake-IP (TUN) 模式
-# 参考用户提供的 default.txt 示例格式生成
 
 [General]
 CORE_TYPE = Meta
-# --- IPv6 设置：已彻底关闭 ---
+EN_MODE = fake-ip-tun
+PROXY_MODE = rule
+STACK_TYPE = gvisor
+RESTART = true
+
+# IPv6 设置 (已关闭)
 IPV6_ENABLE = 0
 IPV6_DNS = 0
 CHINA_IP6_ROUTE = 0
 
-# --- DNS 基础设置 ---
+# DNS 基础设置 (对齐 198.20.0.1)
 ENABLE_REDIRECT_DNS = 1
 ENABLE_CUSTOM_DNS = 1
 APPEND_DEFAULT_DNS = 0
 APPEND_WAN_DNS = 0
 STORE_FAKEIP = 1
+FAKEIP_RANGE = 198.20.0.1/16
 CUSTOM_FAKEIP_FILTER = 1
 CUSTOM_FAKEIP_FILTER_MODE = blacklist
-FAKEIP_RANGE = 198.18.0.1/16
 ENABLE_RESPECT_RULES = 1
-CUSTOM_NAME_POLICY = 1
-CUSTOM_HOST = 1
 CUSTOM_FALLBACK_FILTER = 1
 
-# --- 运行模式：Fake-IP (TUN) ---
-EN_MODE = fake-ip-tun
-PROXY_MODE = rule
-STACK_TYPE = system
+# 中国环境优化
+CHINA_IP_ROUTE = 1
+DISABLE_UDP_QUIC = 1
+INTRANET_ALLOWED = 1
 ROUTER_SELF_PROXY = 1
-INTRANET_ALLOWED = 1          # 允许内网访问，确保 NAS 发现正常
 
-# --- 中国环境优化开关 ---
-CHINA_IP_ROUTE = 1            # 绕过中国 IP，直连更稳定
-DISABLE_UDP_QUIC = 1          # 禁用 QUIC，防止运营商限速
-CHNR_AUTO_UPDATE = 1          # 自动更新大陆 IP 列表
-CHNR_UPDATE_WEEK_TIME = *
-CHNR_UPDATE_DAY_TIME = 4
+# Meta 内核优化
+ENABLE_TCP_CONCURRENT = 1
+ENABLE_UNIFIED_DELAY = 1
+GLOBAL_CLIENT_FINGERPRINT = chrome
 
-# --- Meta 内核安全与性能 ---
+# 自动更新与嗅探
+CHNR_AUTO_UPDATE = 1
+GEOIP_AUTO_UPDATE = 1
+GEOSITE_AUTO_UPDATE = 1
 ENABLE_META_SNIFFER = 1
 ENABLE_META_SNIFFER_CUSTOM = 1
 ENABLE_META_SNIFFER_PURE_IP = 1
-ENABLE_TCP_CONCURRENT = 1
-GLOBAL_CLIENT_FINGERPRINT = chrome
-RESTART = true
 
 [Overwrite]
-# --- DNS 核心逻辑覆写 ---
-# 1. 基础配置
+# DNS 核心逻辑覆写
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['enable']" "true"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipv6']" "false"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['enhanced-mode']" "fake-ip"
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fake-ip-range']" "198.20.0.1/16"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['listen']" "0.0.0.0:7874"
 
-# 2. 国内解析 (nameserver): 阿里 & 腾讯 DoH
+# 1. 国内 DNS (nameserver)
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
 
-# 3. 国外解析 (fallback): Google & Cloudflare 加密 DNS
+# 2. 国外 DNS (fallback)
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback']" "['https://dns.google/dns-query', 'https://1.1.1.1/dns-query', 'tls://8.8.8.8', 'tls://1.1.1.1']"
 
-# 4. 代理服务器解析 (proxy-server-nameserver): 保护机场节点解析隐私
+# 3. 节点域名解析
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['proxy-server-nameserver']" "['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query']"
 
-# 5. 防泄露逻辑 (fallback-filter)
+# 4. 域名分流策略 (NAS & Apple-CN)
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver-policy']" "{'geosite:cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:geolocation-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:apple-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'domain:synology.me': ['119.29.29.29', '223.5.5.5'], 'domain:myqnapcloud.com': ['119.29.29.29', '223.5.5.5'], 'domain:quickconnect.to': ['119.29.29.29', '223.5.5.5']}"
+
+# 5. 防泄露逻辑
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['fallback-filter']" "['geoip']" "true"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['geoip-code']" "CN"
 ruby_map_edit "$CONFIG_FILE" "['dns']" "['ipcidr']" "['240.0.0.0/4']"
 
-# 6. 域名策略 (nameserver-policy): 增加 NAS 常用 DDNS 域名直连，确保远程访问速度
-ruby_map_edit "$CONFIG_FILE" "['dns']" "['nameserver-policy']" "{'geosite:cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'geosite:geolocation-cn': ['https://dns.alidns.com/dns-query', 'https://doh.pub/dns-query'], 'domain:synology.me': ['119.29.29.29', '223.5.5.5'], 'domain:myqnapcloud.com': ['119.29.29.29', '223.5.5.5'], 'domain:quickconnect.to': ['119.29.29.29', '223.5.5.5']}"
-
-# 7. Fake-IP 过滤：确保 NAS 局域网服务不被 Fake-IP 劫持，优化内网 SMB/AFP 访问
-ruby_map_edit "$CONFIG_FILE" "['dns']" "['fake-ip-filter']" "['+.synology.me', '+.myqnapcloud.com', '+.quickconnect.to', 'lan', 'local', 'localhost']"
+# 6. Fake-IP 过滤 (对齐原配置特殊域名)
+ruby_map_edit "$CONFIG_FILE" "['dns']" "['fake-ip-filter']" "['+.lan', '+.local', 'geosite:cn', '+.synology.me', '+.myqnapcloud.com', '+.quickconnect.to', '+.km688.ink', '+.onesubv.site', '+.oneyyds.online', '+.xiaoniuyun.cc', '+.apple-bing.sbs', '+.ynhtbank.com', '+.qeayr.cn', '+.saojc.xyz', '+.dler.cloud', '+.aerianas.top', '+.wxda.net', 'localhost']"
